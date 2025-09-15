@@ -95,7 +95,7 @@ def plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_l
     # Plot each category with different colors
     if green_points:
         x_vals, y_vals = zip(*green_points)
-            ax.plot(x_vals, y_vals, 'go', markersize=5)
+        ax.plot(x_vals, y_vals, 'go', markersize=5)
     
     if orange_points:
         x_vals, y_vals = zip(*orange_points)
@@ -171,6 +171,7 @@ if new_file:
     new_data = df2.iloc[:, 0].dropna().values
     fig2 = plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig2)
+
 
 
 
