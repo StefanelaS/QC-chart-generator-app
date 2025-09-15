@@ -40,9 +40,9 @@ def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, 
 
     x_pos = len(initial_data) + 0.1  # Position text slightly left of the right edge
 
-    ax.text(x_pos, mean, f' Mean = {mean:.2f}', verticalalignment='center', color='black', 
+    ax.text(x_pos, mean, f' Mean = {mean:.2f}', verticalalignment='bottom', color='black', 
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
-    ax.text(x_pos, UAL, f' UAL = {UAL:.2f}', verticalalignment='center', color='red',
+    ax.text(x_pos, UAL, f' UAL = {UAL:.2f}', verticalalignment='bottom', color='red',
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
     ax.text(x_pos, UWL, f' UWL = {UWL:.2f}', verticalalignment='center', color='black',
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
@@ -142,6 +142,7 @@ if new_file:
     new_data = df2.iloc[:, 0].dropna().values
     fig2 = plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig2)
+
 
 
 
