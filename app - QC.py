@@ -92,7 +92,7 @@ if initial_file:
 
     # Calculate control limits
     mean, std, UAL, UWL, LWL, LAL = calculate_control_limits(initial_data)
-    fig1 = plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL)
+    fig1 = plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig1)
 
 # Upload second Excel file (for next step)
@@ -102,6 +102,7 @@ new_file = st.file_uploader("Choose second Excel file", type=['xlsx'])
 if new_file:
     df2 = pd.read_excel(new_file, header=None)
     new_data = df2.iloc[:, 0].dropna().values
+
 
 
 
