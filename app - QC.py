@@ -65,7 +65,11 @@ def plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_l
     fig, ax = plt.subplots(figsize=(8, 5))
 
     # Combine initial and new data
-    #all_data = initial_data + new_data
+    if not isinstance(initial_data, list):
+        initial_data = list(initial_data)
+    if not isinstance(new_data, list):
+        new_data = list(new_data)
+    all_data = initial_data + new_data
     
     # Plot initial data points with time steps (blue)
     initial_time_steps = range(1, len(initial_data) + 1)
@@ -139,6 +143,7 @@ if new_file:
     new_data = df2.iloc[:, 0].dropna().values
     fig2 = plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig2)
+
 
 
 
