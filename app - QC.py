@@ -57,6 +57,8 @@ def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, 
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
+    plt.tight_layout()
+    
     return fig
 
 
@@ -86,7 +88,7 @@ def plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_l
     ax.axhline(y=LWL, color='black', linestyle='--')
     ax.axhline(y=LAL, color='red', linestyle='--')
 
-    x_pos = len(initial_data) + 0.1  # Position text slightly left of the right edge
+    x_pos = len(all_data) + 0.1  # Position text slightly left of the right edge
 
     ax.text(x_pos, mean, f' Mean = {mean:.2f}', verticalalignment='bottom', color='black', 
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
@@ -98,7 +100,10 @@ def plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_l
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
     ax.text(x_pos, LAL, f' LAL = {LAL:.2f}', verticalalignment='bottom', color='red',
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
-    
+
+    # Set axis limits to create extra space
+    ax.set_xticks([])
+    ax.set_xlim(0.5, len(all_data) + 1.5) 
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
@@ -143,6 +148,7 @@ if new_file:
     new_data = df2.iloc[:, 0].dropna().values
     fig2 = plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig2)
+
 
 
 
