@@ -78,7 +78,32 @@ def plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_l
     
     # Plot new data points with time steps (green)
     new_time_steps = range(len(initial_data) + 1, len(all_data) + 1)
-    ax.plot(new_time_steps, new_data, 'go', markersize=5)
+    
+    # Separate new data points into different categories based on control limits
+    green_points = []    # Between UWL and LWL
+    orange_points = []   # Between UWL and UAL or between LWL and LAL
+    red_points = []      # Above UAL or below LAL
+
+    for i, value in enumerate(new_data):
+        if LWL <= value <= UWL:
+            green_points.append((new_time_steps[i], value))
+        elif (UWL < value <= UAL) or (LAL <= value < LWL):
+            orange_points.append((new_time_steps[i], value))
+        elif value > UAL or value < LAL:
+            red_points.append((new_time_steps[i], value))
+
+    # Plot each category with different colors
+    if green_points:
+        x_vals, y_vals = zip(*green_points)
+            ax.plot(x_vals, y_vals, 'go', markersize=5)
+    
+    if orange_points:
+        x_vals, y_vals = zip(*orange_points)
+        ax.plot(x_vals, y_vals, 'o', color='orange', markersize=5)
+    
+    if red_points:
+        x_vals, y_vals = zip(*red_points)
+        ax.plot(x_vals, y_vals, 'ro', markersize=5)
     
     # Plot control limits as horizontal lines
     ax.axhline(y=mean, color='black', linestyle='-')
@@ -146,6 +171,7 @@ if new_file:
     new_data = df2.iloc[:, 0].dropna().values
     fig2 = plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig2)
+
 
 
 
