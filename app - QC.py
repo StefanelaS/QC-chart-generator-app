@@ -37,9 +37,9 @@ def calculate_control_limits(initial_data):
     LAL = mean - 3 * std  # Lower Action Limit
     return mean, std, UAL, UWL, LWL, LAL
 
-def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL):
+def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title):
     """Plot the initial data points with control limits"""
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(8, 5))
     
     # Plot initial data points with time steps
     time_steps = range(1, len(initial_data) + 1)
@@ -61,9 +61,9 @@ def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL):
     ax.text(x_max, LWL, f' LWL ({LWL:.2f})', verticalalignment='center', color='black')
     ax.text(x_max, LAL, f' LAL ({LAL:.2f})', verticalalignment='center', color='red')
     
-    ax.set_xlabel('Time Step')
-    ax.set_ylabel('Value')
-    ax.set_title('Initial Data with Control Limits')
+    ax.set_xlabel(x_label)
+    ax.set_ylabel('y_label')
+    ax.set_title(title)
 
     return fig
 
@@ -76,6 +76,13 @@ This app creates QC charts from Excel files.
 - **File 1**: Initial data points for calculating control limits
 - **File 2**: New data points to monitor against control limits
 """)
+
+# Customization inputs - prazno na početku
+st.header("Graph Customization")
+x_label = st.text_input("X-axis Label", "")
+y_label = st.text_input("Y-axis Label", "")
+title = st.text_input("Plot Title", "")
+
 initial_file = st.file_uploader("Choose first Excel file", type=['xlsx'])
 
 if initial_file:
@@ -87,6 +94,15 @@ if initial_file:
     mean, std, UAL, UWL, LWL, LAL = calculate_control_limits(initial_data)
     fig1 = plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL)
     st.pyplot(fig1)
+
+# Upload second Excel file (for next step)
+st.header("Upload New Data Excel File")
+new_file = st.file_uploader("Choose second Excel file", type=['xlsx'])
+
+if new_file:
+    df2 = pd.read_excel(new_file, header=None)
+    new_data = df2.iloc[:, 0].dropna().values
+
 
 
 
