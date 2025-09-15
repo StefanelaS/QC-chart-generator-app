@@ -53,7 +53,7 @@ def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, 
 
     # Set axis limits to create extra space
     ax.set_xticks([])
-    ax.set_xlim(0.5, len(initial_data) + 0.2*len(initial_data)) 
+    ax.set_xlim(0.5, len(initial_data) + 0.23*len(initial_data)) 
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
@@ -127,7 +127,7 @@ def plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_l
 
     # Set axis limits to create extra space
     ax.set_xticks([])
-    ax.set_xlim(0.5, len(all_data) + 0.2*len(all_data)) 
+    ax.set_xlim(0.5, len(all_data) + 0.23*len(all_data)) 
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
@@ -171,6 +171,7 @@ if new_file:
     new_data = df2.iloc[:, 0].dropna().values
     fig2 = plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig2)
+
 
 
 
