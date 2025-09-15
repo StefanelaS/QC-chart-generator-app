@@ -47,15 +47,15 @@ def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, 
     ax.text(x_pos, UWL, f' UWL = {UWL:.2f}', verticalalignment='center', color='black',
         bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'))
     ax.text(x_pos, LWL, f' LWL ({LWL:.2f})', verticalalignment='center', color='black',
-        bbox=dict(facecolor='white', alpha=1.0, edgecolor='none'))
+        bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
     ax.text(x_pos, LAL, f' LAL ({LAL:.2f})', verticalalignment='center', color='red',
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
 
     # Set axis limits to create extra space
-    ax.set_xlim(0.5, len(initial_data) + 2)  # Extra space on right for text
-    y_min = min(min(initial_data), LAL) - (max(initial_data) - min(initial_data)) * 0.1
-    y_max = max(max(initial_data), UAL) + (max(initial_data) - min(initial_data)) * 0.1
-    ax.set_ylim(y_min, y_max)
+    ax.set_xlim(0.5, len(initial_data) + 1.5)  # Extra space on right for text
+    #y_min = min(min(initial_data), LAL) - (max(initial_data) - min(initial_data)) * 0.1
+    #y_max = max(max(initial_data), UAL) + (max(initial_data) - min(initial_data)) * 0.1
+    ax.set_ylim(LAL, UAL+0.5)
     
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
@@ -132,6 +132,7 @@ new_file = st.file_uploader("Choose second Excel file", type=['xlsx'])
 if new_file:
     df2 = pd.read_excel(new_file, header=None)
     new_data = df2.iloc[:, 0].dropna().values
+
 
 
 
