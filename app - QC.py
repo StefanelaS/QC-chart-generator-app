@@ -52,17 +52,21 @@ def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, 
     ax.axhline(y=LWL, color='black', linestyle='--')
     ax.axhline(y=LAL, color='red', linestyle='--')
 
-    # Add text labels on the right side of the plot
-    x_max = len(initial_data) + 0.5  # Right edge of the plot
-    
-    ax.text(x_max, mean, f' Mean ({mean:.2f})', verticalalignment='center', color='black')
-    ax.text(x_max, UAL, f' UAL ({UAL:.2f})', verticalalignment='center', color='red')
-    ax.text(x_max, UWL, f' UWL ({UWL:.2f})', verticalalignment='center', color='black')
-    ax.text(x_max, LWL, f' LWL ({LWL:.2f})', verticalalignment='center', color='black')
-    ax.text(x_max, LAL, f' LAL ({LAL:.2f})', verticalalignment='center', color='red')
+    x_pos = len(initial_data) - 0.2  # Position text slightly left of the right edge
+
+    ax.text(x_pos, mean, f' Mean ({mean:.2f})', verticalalignment='center', color='black', 
+        bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'))
+    ax.text(x_pos, UAL, f' UAL ({UAL:.2f})', verticalalignment='center', color='red',
+        bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'))
+    ax.text(x_pos, UWL, f' UWL ({UWL:.2f})', verticalalignment='center', color='black',
+        bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'))
+    ax.text(x_pos, LWL, f' LWL ({LWL:.2f})', verticalalignment='center', color='black',
+        bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'))
+    ax.text(x_pos, LAL, f' LAL ({LAL:.2f})', verticalalignment='center', color='red',
+        bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'))
     
     ax.set_xlabel(x_label)
-    ax.set_ylabel('y_label')
+    ax.set_ylabel(y_label)
     ax.set_title(title)
 
     return fig
@@ -102,6 +106,7 @@ new_file = st.file_uploader("Choose second Excel file", type=['xlsx'])
 if new_file:
     df2 = pd.read_excel(new_file, header=None)
     new_data = df2.iloc[:, 0].dropna().values
+
 
 
 
