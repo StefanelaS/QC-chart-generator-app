@@ -40,24 +40,20 @@ def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, 
 
     x_pos = len(initial_data) + 0.1  # Position text slightly left of the right edge
 
-    ax.text(x_pos, mean, f' Mean = {mean:.2f}', verticalalignment='bottom', color='black', 
+    ax.text(x_pos, mean, f' Mean = {mean:.2f}', verticalalignment='bottom', horizontalalignment='right', color='black', 
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
     ax.text(x_pos, UAL, f' UAL = {UAL:.2f}', verticalalignment='bottom', color='red',
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
-    ax.text(x_pos, UWL, f' UWL = {UWL:.2f}', verticalalignment='center', color='black',
+    ax.text(x_pos, UWL, f' UWL = {UWL:.2f}', verticalalignment='bottom', color='black',
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
-    ax.text(x_pos, LWL, f' LWL = {LWL:.2f}', verticalalignment='center', color='black',
+    ax.text(x_pos, LWL, f' LWL = {LWL:.2f}', verticalalignment='bottom', color='black',
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
-    ax.text(x_pos, LAL, f' LAL = {LAL:.2f}', verticalalignment='center', color='red',
+    ax.text(x_pos, LAL, f' LAL = {LAL:.2f}', verticalalignment='bottom', color='red',
         bbox=dict(facecolor='none', alpha=0.7, edgecolor='none'))
 
     # Set axis limits to create extra space
-    ax.set_xlim(0.5, len(initial_data) + 1.5)  # Extra space on right for text
-    #y_min = min(min(initial_data), LAL) - (max(initial_data) - min(initial_data)) * 0.1
-    #y_max = max(max(initial_data), UAL) + (max(initial_data) - min(initial_data)) * 0.1
-    #ax.set_ylim(LAL, UAL+0.5)
-
-    ax.set_xlim(0.5, len(initial_data) + 1.5)
+    ax.set_xticks([])
+    ax.set_xlim(0.5, len(initial_data) + 1.5) 
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
@@ -142,6 +138,7 @@ if new_file:
     new_data = df2.iloc[:, 0].dropna().values
     fig2 = plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig2)
+
 
 
 
