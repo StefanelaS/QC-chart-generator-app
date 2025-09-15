@@ -37,7 +37,7 @@ def calculate_control_limits(initial_data):
     LAL = mean - 3 * std  # Lower Action Limit
     return mean, std, UAL, UWL, LWL, LAL
 
-def plot_initial_data_with_limits(initial_data, mean, UAL, UWL, LWL, LAL):
+def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL):
     """Plot the initial data points with control limits"""
     fig, ax = plt.subplots(figsize=(10, 6))
     
@@ -64,23 +64,9 @@ def plot_initial_data_with_limits(initial_data, mean, UAL, UWL, LWL, LAL):
     ax.set_xlabel('Time Step')
     ax.set_ylabel('Value')
     ax.set_title('Initial Data with Control Limits')
-    ax.legend()
 
-
-def generate_plot(df):
-    
-    c = (df['Diff'] - model.intercept_) / model.coef_[0]
-    accuracy = (c / df['C']).replace([float('inf'), -float('inf')], None) * 100
-    
-    new_df = pd.DataFrame({
-        'Sample': df['Sample'],
-        'Real Ratio': df['Ratio'],
-        'Real C': df['C'],
-        'Shifted Ratio': df['Diff'],
-        'Calculated C': c,
-        'Accuracy (%)': accuracy})
-    
     return fig
+
     
 
 st.title("📊 QC Chart Generator")
@@ -99,6 +85,9 @@ if initial_file:
 
     # Calculate control limits
     mean, std, UAL, UWL, LWL, LAL = calculate_control_limits(initial_data)
+    fig1 = plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL)
+    st.pyplot(fig1)
+
 
 
 
