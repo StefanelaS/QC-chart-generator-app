@@ -57,8 +57,7 @@ def plot_initial_data(initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, 
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
-    plt.tight_layout()
-    
+    #plt.tight_layout()
     return fig
 
 
@@ -107,8 +106,7 @@ def plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_l
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_title(title)
-    plt.tight_layout()
-
+    #plt.tight_layout()
     return fig
 
 
@@ -148,6 +146,7 @@ if new_file:
     new_data = df2.iloc[:, 0].dropna().values
     fig2 = plot_new_data(new_data, initial_data, mean, UAL, UWL, LWL, LAL, x_label, y_label, title)
     st.pyplot(fig2)
+
 
 
 
