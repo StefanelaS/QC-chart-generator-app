@@ -10,9 +10,6 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
-import sklearn
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
 
 # Function to load and process the table
 def load_excel(file):
@@ -103,4 +100,5 @@ def main():
 
         # Calculate control limits
         mean, std, UAL, UWL, LWL, LAL = calculate_control_limits(initial_data)
+
 
