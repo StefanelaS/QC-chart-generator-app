@@ -83,22 +83,22 @@ def generate_plot(df):
     return fig
     
 
-def main():
-    st.title("📊 QC Chart Generator")
+st.title("📊 QC Chart Generator")
     
-    st.markdown("""
-    This app creates QC charts from Excel files.
-    - **File 1**: Initial data points for calculating control limits
-    - **File 2**: New data points to monitor against control limits
-    """)
-    initial_file = st.file_uploader("Choose first Excel file", type=['xlsx'])
+st.markdown("""
+This app creates QC charts from Excel files.
+- **File 1**: Initial data points for calculating control limits
+- **File 2**: New data points to monitor against control limits
+""")
+initial_file = st.file_uploader("Choose first Excel file", type=['xlsx'])
 
-    if initial_file:
-        # Load the Excel file - use the first column
-        df1 = pd.read_excel(initial_file, header=None)  # No header
-        initial_data = df1.iloc[:, 0].dropna().values  # Get first column data
+if initial_file:
+    # Load the Excel file - use the first column
+    df1 = pd.read_excel(initial_file, header=None)  # No header
+    initial_data = df1.iloc[:, 0].dropna().values  # Get first column data
 
-        # Calculate control limits
-        mean, std, UAL, UWL, LWL, LAL = calculate_control_limits(initial_data)
+    # Calculate control limits
+    mean, std, UAL, UWL, LWL, LAL = calculate_control_limits(initial_data)
+
 
 
